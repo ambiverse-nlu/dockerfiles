@@ -1,7 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
 * latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/ambiverse-nlu/Dockerfile)
-* v18 [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/ambiverse-nlu/Dockerfile)
 
 # AmbiverseNLU Dockerfile
 This docker images is the official image of the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) project.
