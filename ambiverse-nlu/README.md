@@ -27,8 +27,7 @@ If you want to start the container and link it to the `nlu-db-postgres` docker c
 First start the PostreSQL docker container that contains the database dump:
 
 ~~~~~~~~
-docker run -d --restart=always \
-  --name nlu-db-postgres \
+docker run -d --restart=always --name nlu-db-postgres \
   -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
   -e POSTGRES_USER=ambiversenlu \
   -e POSTGRES_PASSWORD=ambiversenlu \
@@ -39,13 +38,9 @@ docker run -d --restart=always \
 
 Then start the AmbiverseNLU container by linking the running PostgreSQL container.
 ~~~~~~~~
-docker run -d --restart=always \ 
- --name ambiverse-nlu \
+docker run -d --restart=always --name ambiverse-nlu \
  -p 8080:8080 \
  --link nlu-db-postgres:db \
- -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
- -e POSTGRES_USER=ambiversenlu \
- -e POSTGRES_PASSWORD=ambiversenlu \
  -e AIDA_CONF=aida_20180120_cs_de_en_es_ru_zh_v18_db \
  ambiverse/ambiverse-nlu
 ~~~~~~~~
@@ -55,8 +50,7 @@ docker run -d --restart=always \
 Similarly for Cassandra, first start the Cassandra container that contains the database dump:
 
 ~~~~~~~~
-docker run -d --restart=always \
- --name nlu-db-cassandra \
+docker run -d --restart=always --name nlu-db-cassandra \
  -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
  ambiverse/nlu-db-cassandra
 ~~~~~~~~
@@ -64,11 +58,9 @@ docker run -d --restart=always \
 &nbsp;
 Then start the AmbiverseNLU container by linking the running Cassandra container.
 ~~~~~~~~
-docker run -d --restart=always \
- --name ambiverse-nlu \
- -p 9081:8080 \
+docker run -d --restart=always --name ambiverse-nlu \
+ -p 8080:8080 \
  --link nlu-db-cassandra:db \
- -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
  -e AIDA_CONF=aida_20180120_cs_de_en_es_ru_zh_v18_cass \
  ambiverse/ambiverse-nlu
 ~~~~~~~~
@@ -163,3 +155,26 @@ services:
     environment:
       AIDA_CONF: aida_20180120_cs_de_en_es_ru_zh_v18_cass
 ~~~~~~~~
+
+## Running a custom configuration
+If you want to run a custom configuration, i.e. you have a running database server which is not a docker container, you can create a `.properties` files yourself, and link the file. 
+For example, you have cassandra running one real servers, and you want the service to use this cassandra cluster, you create the file `cassandra.properties` and mount the file as a docker volume with the following command:
+
+~~~~~~~~
+docker run -d --restart=always --name ambiverse-nlu \
+ -p 8080:8080 \
+ -e AIDA_CONF=aida_20180120_cs_de_en_es_ru_zh_v18_cass \
+ -v $(pwd)/cassandra.properties:/ambiverse-nlu/src/main/config/aida_20180120_cs_de_en_es_ru_zh_v18_cass/cassandra.properties \
+ ambiverse/ambiverse-nlu
+~~~~~~~~
+
+Similarly for PostgreSQL:
+
+~~~~~~~~
+docker run -d --restart=always --name ambiverse-nlu \
+ -p 8080:8080 \
+ -e AIDA_CONF=aida_20180120_cs_de_en_es_ru_zh_v18_db \
+ -v $(pwd)/database_aida.properties:/ambiverse-nlu/src/main/config/aida_20180120_cs_de_en_es_ru_zh_v18_db/database_aida.properties \
+ ambiverse/ambiverse-nlu
+~~~~~~~~ 
+ 
