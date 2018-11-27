@@ -29,8 +29,7 @@ This environmental variable sets the password for the user `POSTGRES_USER`. If y
 ## Running the image
 To run the image as a standalone database server:
 ~~~~~~~~
-docker run -d --restart=always \
-  --name nlu-db-postgres \
+docker run -d --restart=always --name nlu-db-postgres \
   -p 5432:5432 \
   -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
   -e POSTGRES_USER=ambiversenlu \
@@ -42,8 +41,7 @@ docker run -d --restart=always \
 To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service you can do it in the following two ways:
 
 ~~~~~~~~
-docker run -d --restart=always \
- --name ambiverse-nlu \
+docker run -d --restart=always --name ambiverse-nlu \
  -p 8080:8080 \
  --link nlu-db-postgres:db \
  -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
@@ -87,8 +85,7 @@ There are many ways to configure the PostgreSQL database server. There is a whol
 We are copying a `postgresql.conf.sample` over to `/usr/share/postgresql/postgresql.conf.sample`. 
 If you want to extend this configurations, you can link the file [postgresql.conf.sample](https://github.com/ambiverse-nlu/dockerfiles/nlu-db-postgres/postgresql.conf.sample) in your docker run by adding it as a volume:
 ~~~~~~~~
-docker run -d --restart=always \ 
-  --name nlu-db-postgres \
+docker run -d --restart=always --name nlu-db-postgres \
   -p 5432:5432 \
   -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
   -e POSTGRES_USER=ambiversenlu \
