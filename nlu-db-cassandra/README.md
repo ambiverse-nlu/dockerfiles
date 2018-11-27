@@ -27,8 +27,7 @@ The name must be chosen from the following list of dumps:
 To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service you can do it in the following two ways:
 
 ~~~~~~~~
-docker run -d --restart=always \
- --name nlu-db-cassandra \
+docker run -d --restart=always --name nlu-db-cassandra \
  -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
  ambiverse/nlu-db-cassandra
 ~~~~~~~~
