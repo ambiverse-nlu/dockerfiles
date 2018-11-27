@@ -177,4 +177,3 @@ docker run -d --restart=always --name ambiverse-nlu \
  -v $(pwd)/database_aida.properties:/ambiverse-nlu/src/main/config/aida_20180120_cs_de_en_es_ru_zh_v18_db/database_aida.properties \
  ambiverse/ambiverse-nlu
 ~~~~~~~~ 
- 
