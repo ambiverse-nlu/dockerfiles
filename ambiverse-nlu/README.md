@@ -35,6 +35,8 @@ docker run -d --restart=always \
   ambiverse/nlu-db-postgres
 ~~~~~~~~
 
+&nbsp;
+
 Then start the AmbiverseNLU container by linking the running PostgreSQL container.
 ~~~~~~~~
 docker run -d --restart=always \ 
@@ -48,6 +50,8 @@ docker run -d --restart=always \
  ambiverse/ambiverse-nlu
 ~~~~~~~~
 
+&nbsp;
+
 Similarly for Cassandra, first start the Cassandra container that contains the database dump:
 
 ~~~~~~~~
@@ -57,7 +61,8 @@ docker run -d --restart=always \
  ambiverse/nlu-db-cassandra
 ~~~~~~~~
 
-
+&nbsp;
+Then start the AmbiverseNLU container by linking the running Cassandra container.
 ~~~~~~~~
 docker run -d --restart=always \
  --name ambiverse-nlu \
@@ -68,7 +73,7 @@ docker run -d --restart=always \
  ambiverse/ambiverse-nlu
 ~~~~~~~~
 
-
+&nbsp;
 
 ### ... or via `docker-stack deploy` or `docker-compose`
 Example service-postgres.yml for [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu):
@@ -95,6 +100,9 @@ services:
     environment:
       AIDA_CONF: aida_20180120_cs_de_en_es_ru_zh_v18_db
 ~~~~~~~~
+
+&nbsp;
+
 Run `docker stack deploy -c service-postgres.yml cassandra` (or `docker-compose -f service-postgres.yml up`), wait for it to initialize completely.
 
 Example service-cassandra.yml for [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu):
@@ -119,6 +127,8 @@ services:
     environment:
       AIDA_CONF: aida_20180120_cs_de_en_es_ru_zh_v18_cass
 ~~~~~~~~
+
+&nbsp;
 
 Run `docker stack deploy -c service-cassandra.yml cassandra` (or `docker-compose -f service-cassandra.yml up`), wait for it to initialize completely.
 
