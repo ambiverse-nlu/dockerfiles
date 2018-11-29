@@ -37,7 +37,7 @@ docker run -d --restart=always --name nlu-db-postgres \
   ambiverse/nlu-db-postgres
 ~~~~~~~~
 
-## Connecting it from the Entity Linking container
+## Connecting it from the AmbiverseNLU container
 To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service you can do it in the following two ways:
 
 ~~~~~~~~

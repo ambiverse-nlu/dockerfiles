@@ -23,7 +23,7 @@ The name must be chosen from the following list of dumps:
 - **[aida_20180120_b3_de_en_v18](http://ambiversenlu-download.mpi-inf.mpg.de/cassandra/aida_20180120_b3_de_en_v18.tar.gz)** - a sample database containing companies in the DJIA and related entities.
 
 
-## Connecting it from the Entity Linking container
+## Connecting it from the AmbiverseNLU container
 To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service you can do it in the following two ways:
 
 ~~~~~~~~
@@ -45,7 +45,7 @@ services:
     environment:
       DATABASE_NAME: aida_20180120_cs_de_en_es_ru_zh_v18
 
-  entitylinking:
+  nlu:
     image: ambiverse/ambiverse-nlu
     restart: always
     depends_on:
@@ -78,7 +78,7 @@ services:
         DATABASE_NAME: aida_20180120_2f_de_en_v18
         CASSANDRA_SEEDS: db,db1
 
-  entitylinking:
+  nlu:
     image: ambiverse/ambiverse-nlu
     restart: always
     depends_on:
