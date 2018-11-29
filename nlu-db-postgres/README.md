@@ -4,7 +4,7 @@
 
 # AmbiverseNLU PostgreSQL Database Dockerfile
 
-This Dockerfile is an extension of the [postgres:9.4](https://github.com/docker-library/postgres/blob/3f585c58df93e93b730c09a13e8904b96fa20c58/9.4/Dockerfile) official docker image. It creates a database user specified by an environment variable (`ambiversenlu` by default), downloads the specified database dump and restores the database from the dump. With this image you are ready to use the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service with PostgreSQL database.
+This Dockerfile is an extension of the [postgres:9.4](https://github.com/docker-library/postgres/blob/3f585c58df93e93b730c09a13e8904b96fa20c58/9.4/Dockerfile) official docker image. It creates a database user specified by an environment variable (`ambiversenlu` by default), downloads the specified database dump and restores the database from the dump. With this image you are ready to use the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service with PostgreSQL database.
 
 ## Environment Variables
 This image has several environment variables that need to be setup. Besides the environment variables from the [original image](https://hub.docker.com/_/postgres/) that can be setup and are optional, some the following environment variables are mandatory. 
