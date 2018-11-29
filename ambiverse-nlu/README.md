@@ -29,6 +29,7 @@ First start the PostreSQL docker container that contains the database dump:
 
 ~~~~~~~~
 docker run -d --restart=always --name nlu-db-postgres \
+  -p 5432:5432 \
   -e POSTGRES_DB=aida_20180120_cs_de_en_es_ru_zh_v18 \
   -e POSTGRES_USER=ambiversenlu \
   -e POSTGRES_PASSWORD=ambiversenlu \
@@ -52,6 +53,11 @@ Similarly for Cassandra, first start the Cassandra container that contains the d
 
 ~~~~~~~~
 docker run -d --restart=always --name nlu-db-cassandra \
+ -p 7000:7000 \
+ -p 7001:7001 \
+ -p 9042:9042 \
+ -p 7199:7199 \
+ -p 9160:9160 \
  -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
  ambiverse/nlu-db-cassandra
 ~~~~~~~~

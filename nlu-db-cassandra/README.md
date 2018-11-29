@@ -23,13 +23,31 @@ The name must be chosen from the following list of dumps:
 - **[aida_20180120_b3_de_en_v18](http://ambiversenlu-download.mpi-inf.mpg.de/cassandra/aida_20180120_b3_de_en_v18.tar.gz)** - a sample database containing companies in the DJIA and related entities.
 
 
+## Running the image
+To run the image as a standalone database server:
+~~~~~~~~
+docker run -d --restart=always --name nlu-db-cassandra \
+ -p 7000:7000 \
+ -p 7001:7001 \
+ -p 9042:9042 \
+ -p 7199:7199 \
+ -p 9160:9160 \
+ -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
+ ambiverse/nlu-db-cassandra
+~~~~~~~~
+
 ## Connecting it from the AmbiverseNLU container
 To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service you can do it in the following two ways:
 
+
+
+Then start the AmbiverseNLU container by linking the running Cassandra container.
 ~~~~~~~~
-docker run -d --restart=always --name nlu-db-cassandra \
- -e DATABASE_NAME=aida_20180120_cs_de_en_es_ru_zh_v18 \
- ambiverse/nlu-db-cassandra
+docker run -d --restart=always --name ambiverse-nlu \
+ -p 8080:8080 \
+ --link nlu-db-cassandra:db \
+ -e AIDA_CONF=aida_20180120_cs_de_en_es_ru_zh_v18_cass \
+ ambiverse/ambiverse-nlu
 ~~~~~~~~
 
 ### ... or via `docker-stack deploy` or `docker-compose`
