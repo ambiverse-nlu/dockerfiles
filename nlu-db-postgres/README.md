@@ -1,6 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
-* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/nlu-db-postgres/Dockerfile)
+* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/nlu-db-postgres/Dockerfile)
 
 # AmbiverseNLU PostgreSQL Database Dockerfile
 
@@ -38,7 +38,7 @@ docker run -d --restart=always --name nlu-db-postgres \
 ~~~~~~~~
 
 ## Connecting it from the Entity Linking container
-To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service you can do it in the following two ways:
+To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service you can do it in the following two ways:
 
 ~~~~~~~~
 docker run -d --restart=always --name ambiverse-nlu \
@@ -83,7 +83,7 @@ Run docker stack deploy -c service-postgres.yml postgres (or docker-compose -f s
 ## Advanced Database Configuration.
 There are many ways to configure the PostgreSQL database server. There is a whole section in the official PostgreSQL docker image [page](https://hub.docker.com/_/postgres/).
 We are copying a `postgresql.conf.sample` over to `/usr/share/postgresql/postgresql.conf.sample`. 
-If you want to extend this configurations, you can link the file [postgresql.conf.sample](https://github.com/ambiverse-nlu/dockerfiles/nlu-db-postgres/postgresql.conf.sample) in your docker run by adding it as a volume:
+If you want to extend this configurations, you can link the file [postgresql.conf.sample](https://github.com/ambiverse-nlu/dockerfiles/blob/master/nlu-db-postgres/postgresql.conf.sample) in your docker run by adding it as a volume:
 ~~~~~~~~
 docker run -d --restart=always --name nlu-db-postgres \
   -p 5432:5432 \

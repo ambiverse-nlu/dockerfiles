@@ -1,7 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/ambiverse-nlu/Dockerfile)
+* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-nlu/latest/Dockerfile)
 
+      
 # AmbiverseNLU Dockerfile
 This docker images is the official image of the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) project.
 The image contains the full repository of the code, and it starts a jetty webservice on `8080` port.

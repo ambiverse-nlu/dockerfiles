@@ -1,12 +1,12 @@
 # Supported tags and respective `Dockerfile` links
 
-* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/nlu-db-cassandra/Dockerfile)
+* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/nlu-db-cassandra/Dockerfile)
 
 # AmbiverseNLU Cassandra Database Dockerfile
 
 This Dockerfile is an extension of the [cassandra:3.11](https://github.com/docker-library/cassandra/blob/4474c6c5cc2a81ee57c5615aae00555fca7e26a6/3.11/Dockerfile)
 official docker image. It extends the `docker-endpoint.sh` script from the [this](https://github.com/emschimmel/cassandra/blob/master/3.11/docker-entrypoint.sh) pull-request 
-that allows initializing the image with `*.cql` dumps.  With this image you are ready to use the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service with Cassandra database.
+that allows initializing the image with `*.cql` dumps.  With this image you are ready to use the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service with Cassandra database.
 
 This image shows how to setup a single node cassandra database populated with the Entity Linking database. If you want to make a cassandra cluster, please
 have a look at the official cassandra docker [documentation](https://hub.docker.com/_/cassandra/).
@@ -24,7 +24,7 @@ The name must be chosen from the following list of dumps:
 
 
 ## Connecting it from the Entity Linking container
-To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) service you can do it in the following two ways:
+To run the image from and connect it to directly with the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) service you can do it in the following two ways:
 
 ~~~~~~~~
 docker run -d --restart=always --name nlu-db-cassandra \
@@ -33,7 +33,7 @@ docker run -d --restart=always --name nlu-db-cassandra \
 ~~~~~~~~
 
 ### ... or via `docker-stack deploy` or `docker-compose`
-Example service-cassandra.yml for [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu):
+Example service-cassandra.yml for [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu):
 ~~~~~~~~
 version: '3.1'
 
