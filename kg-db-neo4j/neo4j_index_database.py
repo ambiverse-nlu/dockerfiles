@@ -5,7 +5,7 @@
 Create indexes on neo4j graph database. The indexes are on wikidata instances and spatial indexes.
 
 Usage:
-  neo4jIndexingDatabase.py -h HOST_ADDRESS --neo4j-username=NEO4J_USER --neo4j-password=NEO4J_PASS
+  neo4j_index_database.py -h HOST_ADDRESS --neo4j-username=NEO4J_USER --neo4j-password=NEO4J_PASS
   
 Options:
   -h HOST_ADDRESS --host=HOST_ADDRESS                           Neo4j Server Host Address
@@ -40,13 +40,9 @@ def createSpatialIndex():
   print('Start Spatial indexing')
   try:
     with driver.session() as session:
-      # neo4j-3.4:
-      session.run("CREATE INDEX ON :Location(location)");
-      session.run("CALL apoc.periodic.commit(\"MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)\", {})");    
 
-      #neo4j-3.3 using spatial library:
-      #ession.run("CALL spatial.addPointLayer('geom')")
-      #session.run("CALL apoc.periodic.commit(\"MATCH (l:Location) WHERE NOT (l)<-[:RTREE_REFERENCE]-() WITH l LIMIT 10000 WITH collect(l) as locs call spatial.addNodes('geom', locs) YIELD count return count\", {})")
+      session.run("CREATE INDEX ON :Location(location)");
+      session.run("CALL apoc.periodic.commit(\"MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)\", {})");
 
     return True
 
