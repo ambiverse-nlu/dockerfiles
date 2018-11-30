@@ -4,7 +4,7 @@
 
       
 # AmbiverseNLU Dockerfile
-This docker images is the official image of the [AmbiverseNLU](https://github.com/ambiverse-nlu/nlu) project.
+This docker images is the official image of the [AmbiverseNLU](https://github.com/ambiverse-nlu/ambiverse-nlu) project.
 The image contains the full repository of the code, and it starts a jetty webservice on `8080` port.
 
 ## Environment Variables
