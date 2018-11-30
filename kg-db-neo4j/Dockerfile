@@ -17,7 +17,6 @@ VOLUME ${DATA_PATH}
 #Add the apoc plugin
 ADD https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/3.5.0.1/apoc-3.5.0.1-all.jar /var/lib/neo4j/plugins/
 ADD https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/download/3.5.0.1/graph-algorithms-algo-3.5.0.1.jar /var/lib/neo4j/plugins/
-ADD https://github.com/neo4j-contrib/spatial/releases/download/0.25.7-neo4j-3.4.9/neo4j-spatial-0.25.7-neo4j-3.4.9-server-plugin.jar /var/lib/neo4j/plugins/
 
 COPY download_db.sh /download_db.sh
 

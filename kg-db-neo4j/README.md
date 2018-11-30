@@ -105,11 +105,7 @@ CREATE INDEX ON :Location(location);
 ~~~~~~~~
 
 ~~~~~~~~
-CALL spatial.addPointLayer('geom');
-~~~~~~~~
-
-~~~~~~~~
-CALL apoc.periodic.commit(\MATCH (l:Location) WHERE NOT (l)<-[:RTREE_REFERENCE]-() WITH l LIMIT 10000 WITH collect(l) as locs call spatial.addNodes('geom', locs) YIELD count return count", {})
+CALL apoc.periodic.commit("MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)", {})
 ~~~~~~~~
 
 &nbsp;
