@@ -88,7 +88,7 @@ services:
       - db
     ports:
       - 8080:8080
-~~~~~~~~
+~~~~~~~~running
 
 Run `docker stack deploy -c service-kg.yml ambiverse-kg` (or `docker-compose -f service-kg.yml up`), wait for it to initialize completely.
 
