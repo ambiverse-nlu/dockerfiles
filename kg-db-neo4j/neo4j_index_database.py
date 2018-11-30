@@ -42,7 +42,9 @@ def createSpatialIndex():
     with driver.session() as session:
 
       session.run("CREATE INDEX ON :Location(location)");
-      session.run("CALL apoc.periodic.commit(\"MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)\", {})");
+      session.run("CALL spatial.addPointLayer('geom')")
+      session.run("CALL apoc.periodic.commit(\"MATCH (l:Location) WHERE NOT (l)<-[:RTREE_REFERENCE]-() WITH l LIMIT 10000 WITH collect(l) as locs call spatial.addNodes('geom', locs) YIELD count return count\", {})")
+
 
     return True
 

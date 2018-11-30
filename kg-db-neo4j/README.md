@@ -88,7 +88,7 @@ services:
       - db
     ports:
       - 8080:8080
-~~~~~~~~running
+~~~~~~~~
 
 Run `docker stack deploy -c service-kg.yml ambiverse-kg` (or `docker-compose -f service-kg.yml up`), wait for it to initialize completely.
 
@@ -105,7 +105,11 @@ CREATE INDEX ON :Location(location);
 ~~~~~~~~
 
 ~~~~~~~~
-CALL apoc.periodic.commit("MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)", {});
+CALL spatial.addPointLayer('geom');
+~~~~~~~~
+
+~~~~~~~~
+CALL apoc.periodic.commit(\MATCH (l:Location) WHERE NOT (l)<-[:RTREE_REFERENCE]-() WITH l LIMIT 10000 WITH collect(l) as locs call spatial.addNodes('geom', locs) YIELD count return count", {})
 ~~~~~~~~
 
 &nbsp;
