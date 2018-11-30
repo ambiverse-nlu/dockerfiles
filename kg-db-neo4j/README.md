@@ -26,7 +26,7 @@ This environment variable is from the original image, and sets the database defi
 In the next section there is a command how to run neo4j with `docker run` and `docker-compose`. The environment variables used there are recommended and working for the size of the database dump.
 Please note that if you change `NEO4J_AUTH` you have to adapt the `neo4j.properties` file in the [AmbiverseNLU KG](https://github.com/ambiverse-nlu/ambiverse-kg) accordingly, or link an external file to the KG container.
 
-## Rinning the AmbiverseNLU container
+## Running the AmbiverseNLU container
 To run the image from and connect it to directly with the [AmbiverseNLU KG](https://github.com/ambiverse-nlu/ambiverse-kg) service you can do it in the following two ways:
 
 ~~~~~~~~
