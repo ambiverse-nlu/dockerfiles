@@ -4,7 +4,7 @@
 
 # AmbiverseNLU Knowledge Graph Neo4j Database Dockerfile
 
-This Dockerfile is an extension of the [neo4j:3.5.0](https://github.com/neo4j/docker-neo4j-publish/blob/bc0c1be414f5b671a681af8ac5dd8a5f83c02730/3.5.0/community/Dockerfile) official docker image. It creates a neo4j graph database specified by an environment variable, downloads the specified database dump and restores the database from the dump. With this image you are ready to use the [AmbiverseNLU Knowledge Graph](https://github.com/ambiverse-nlu/ambiverse-kg) service with neo4j graph database.
+This Dockerfile is an extension of the [neo4j:3.5.0](https://github.com/neo4j/docker-neo4j-publish/blob/bc0c1be414f5b671a681af8ac5dd8a5f83c02730/3.5.0/community/Dockerfile) official docker image. It creates a neo4j graph database version of [YAGO](http://yago-knowledge.org) with a name of the database specified by an environment variable, downloads the database dump and restores the database from the dump. With this image you are ready to use the [AmbiverseNLU Knowledge Graph](https://github.com/ambiverse-nlu/ambiverse-kg) service with neo4j graph database.
 
 ## Environment Variables
 This image has several environment variables that need to be setup. Besides the environment variables from the [original image](https://hub.docker.com/r/_/neo4j/) that can be setup and are optional, some the following environment variables are mandatory. 
