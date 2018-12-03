@@ -34,9 +34,9 @@ docker run -d --restart=always --name kg-db-neo4j \
 	-p 7474:7474 -p 7687:7687 \
 	-e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
 	-e NEO4J_dbms_active__database=yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120.db \
-	-e NEO4J_dbms_memory_pagecache_size=50G \
-	-e NEO4J_dbms_memory_heap_initial__size=20G \
-	-e NEO4J_dbms_memory_heap_max__size=20G \
+	-e NEO4J_dbms_memory_pagecache_size=8G \
+	-e NEO4J_dbms_memory_heap_initial__size=8G \
+	-e NEO4J_dbms_memory_heap_max__size=12G \
 	-e NEO4J_dbms_connectors_default__listen__address=0.0.0.0 \
 	-e NEO4J_dbms_security_procedures_unrestricted=apoc.* \
 	-e NEO4J_AUTH=neo4j/neo4j_pass \
@@ -70,9 +70,9 @@ services:
     environment:
       DUMP_NAME: yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120
       NEO4J_dbms_active__database: yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120.db
-      NEO4J_dbms_memory_pagecache_size: 50G
-      NEO4J_dbms_memory_heap_initial__size: 20G
-      NEO4J_dbms_memory_heap_max__size: 20G
+      NEO4J_dbms_memory_pagecache_size: 8G
+      NEO4J_dbms_memory_heap_initial__size: 8G
+      NEO4J_dbms_memory_heap_max__size: 12G
       NEO4J_dbms_connectors_default__listen__address: 0.0.0.0
       NEO4J_dbms_security_procedures_unrestricted=apoc.*
       NEO4J_AUTH: neo4j/neo4j_pass
