@@ -1,6 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
 * latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-nlu/latest/Dockerfile)
+* latest-lowmem [(latest-lowmem/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-nlu/latest-lowmem/Dockerfile)
+* 1.0.0 [(1.0.0/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-nlu/1.0.0/Dockerfile)
 
       
 # AmbiverseNLU Dockerfile
