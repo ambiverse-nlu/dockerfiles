@@ -25,10 +25,10 @@ _process_init_file() {
 _check_files() {
 	until cqlsh -e 'describe cluster'; do
 		# processing the files in the data directory
-		echo "cassandra not ready, will wait";
-		sleep 2
+		echo "Cassandra service is still starting up, waiting for it...";
+		sleep 30
 	done
-	echo "cassandra ready, processing files";
+	echo "Cassandra service ready, starting to import.";
 	for f in ${DATA_PATH}/*; do
 		echo "processing file $f"
 		_process_init_file "$f"
@@ -75,12 +75,13 @@ _download_dump(){
     local dump="$1"
     if [ ! -d "/var/lib/cassandra/data/$dump" ]
     then
-       echo "Keyspace does not exist"
        echo "Downloading dump from http://ambiversenlu-download.mpi-inf.mpg.de/cassandra/$dump.tar.gz ..."
 
        wget -q --no-cookies -O - "http://ambiversenlu-download.mpi-inf.mpg.de/cassandra/$dump.tar.gz" \
        | tar xz --directory=${DATA_PATH} -f -
        echo "Download finished!"
+    else
+        echo "Using existing keyspace $dump ."
     fi
 }
 
@@ -114,13 +115,7 @@ if [ -d "${DATA_PATH}" ]; then
 
     if [ "$DATABASE_NAME" ]; then
         _remove_data_tmp
-#        for language in $(echo ${KNOWNER_LANGUAGES} | sed "s/,/ /g")
-#        do
-#            _download_dump "${DATABASE_NAME}_ner_$language"
-#        done
-
          _download_dump "${DATABASE_NAME}"
-
     fi
 
 	if [ ! -z "$(ls -A ${DATA_PATH})" ]; then
