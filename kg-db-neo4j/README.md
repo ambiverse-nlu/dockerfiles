@@ -32,7 +32,6 @@ To run the image from and connect it to directly with the [AmbiverseNLU KG](http
 ~~~~~~~~
 docker run -d --restart=always --name kg-db-neo4j \
 	-p 7474:7474 -p 7687:7687 \
-	-e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
 	-e NEO4J_dbms_active__database=yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120.db \
 	-e NEO4J_dbms_memory_pagecache_size=8G \
 	-e NEO4J_dbms_memory_heap_initial__size=8G \
@@ -51,7 +50,7 @@ If you want to connect it to the AmbiverseNLU KG container, use the command belo
 ~~~~~~~~
 docker run -d --restart=always --name ambiverse-kg \
  -p 8080:8080 \
- --link kg-db-neo4j:db \
+ --link kg-db-neo4j:kg-db \
  ambiverse/ambiverse-kg
 ~~~~~~~~
 
@@ -64,7 +63,7 @@ version: '3.1'
 
 services:
 
-  db:
+  kg-db:
     image: ambiverse/kg-db-neo4j
     restart: always
     environment:
@@ -74,9 +73,8 @@ services:
       NEO4J_dbms_memory_heap_initial__size: 8G
       NEO4J_dbms_memory_heap_max__size: 12G
       NEO4J_dbms_connectors_default__listen__address: 0.0.0.0
-      NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
       NEO4J_AUTH: neo4j/neo4j_pass
-      NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
     ulimits:
         nofile:
             40000:40000            
@@ -85,7 +83,7 @@ services:
     image: ambiverse/ambiverse-kg
     restart: always
     depends_on:
-      - db
+      - kg-db
     ports:
       - 8080:8080
 ~~~~~~~~
