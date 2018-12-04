@@ -2,7 +2,6 @@
 
 * latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-kg/latest/Dockerfile)
 * 1.0.0 [(1.0.0/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-kg/1.0.0/Dockerfile)
-
       
 # AmbiverseNLU Knowledge Graph Dockerfile
 This docker images is the official image of the [AmbiverseNLU KG](https://github.com/ambiverse-nlu/ambiverse-kg) project.
