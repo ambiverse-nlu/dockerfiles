@@ -4,8 +4,6 @@ MAINTAINER AmbiverseNLU <ambiversenlu-admin@mpi-inf.mpg.de>
 
 ENV AIDA_CONF=default
 
-RUN java -version
-
 WORKDIR /ambiverse-nlu
 
 RUN git clone https://github.com/ambiverse-nlu/ambiverse-nlu.git /ambiverse-nlu
