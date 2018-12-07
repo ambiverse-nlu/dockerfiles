@@ -1,6 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
-* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-kg/latest/Dockerfile)
+* latest [(latest/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-kg/Dockerfile)
 * 1.0.0 [(1.0.0/Dockerfile)](https://github.com/ambiverse-nlu/dockerfiles/blob/master/ambiverse-kg/1.0.0/Dockerfile)
       
 # AmbiverseNLU Knowledge Graph Dockerfile
