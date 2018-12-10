@@ -41,6 +41,7 @@ docker run -d --restart=always --name kg-db-neo4j \
 	-e NEO4J_AUTH=neo4j/neo4j_pass \
 	-e DUMP_NAME=yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120 \
 	--ulimit=nofile=40000:40000 \
+	-v $HOME/neo4j/data:/data \
 	ambiverse/kg-db-neo4j
 ~~~~~~~~
 
@@ -77,7 +78,9 @@ services:
       NEO4J_AUTH: neo4j/neo4j_pass
     ulimits:
         nofile:
-            40000:40000            
+            40000:40000     
+    volumes:
+      - $HOME/neo4j/data:/data               
 
   nlu:
     image: ambiverse/ambiverse-kg
