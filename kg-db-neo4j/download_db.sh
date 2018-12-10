@@ -29,25 +29,9 @@ then
     #echo 'dbms.security.auth_enabled=false' >> $CONF
     echo 'browser.remote_content_hostname_whitelist=*' >> $CONF
 
-#    if [[ "$(id -u)" = "0" ]]; then
-#      chmod -R 755 /data
-#      chown -R "${userid}":"${groupid}" /data
-#    fi
-#
-#
-#    if [ "${cmd}" == "neo4j" ]; then
-#      ${exec_cmd} neo4j console &
-#    else
-#      ${exec_cmd} "$@" &
-#    fi
-#
-#    IFS=/ read -ra array <<<"${NEO4J_AUTH1}"
-#
-#    cp -R plugins ./data/databases/${DUMP_NAME}.db/
-#    until cat /configure.cql | ./bin/cypher-shell -u ${array[0]} -p ${array[1]}; do
-#        echo "cypher-shell: Neo4j is unavailable - retry later"
-#		sleep 2
-#	done
+    echo "Removing the dump";
+    rm -rf ${DATA_PATH}/${DUMP_NAME}
+
 else
     echo "Database ${DUMP_NAME}.db already exists"
 fi
