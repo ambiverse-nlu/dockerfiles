@@ -1,6 +1,5 @@
 #Dockerfile for NLU Cassandra Database
-
-FROM cassandra:3.11
+FROM cassandra:3.11.4
 
 MAINTAINER Ambiverse <ambiversenlu-admin@mpi-inf.mpg.de>
 
@@ -13,10 +12,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 VOLUME ${DATA_PATH}
 
-# Copy the custom docker-entrypoint.sh script.
-# The script is taken from https://github.com/emschimmel/cassandra/blob/master/3.11/docker-entrypoint.sh
-# and allows to execute eny cql files loaded in the /data directory.
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY ready-probe.sh /ready-probe.sh
+COPY wait-for-it.sh /wait-for-it.sh
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
