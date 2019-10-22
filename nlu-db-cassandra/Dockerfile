@@ -13,7 +13,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 VOLUME ${DATA_PATH}
 
 COPY ready-probe.sh /ready-probe.sh
-COPY wait-for-it.sh /wait-for-it.sh
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN export DEBIAN_FRONTEND=noninteractive \
