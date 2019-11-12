@@ -60,13 +60,15 @@ docker run -d --restart=always --name ambiverse-kg \
 ### ... or via `docker-stack deploy` or `docker-compose`
 Example service-kg.yml for [AmbiverseNLU KG](https://github.com/ambiverse-nlu/ambiverse-kg):
 ~~~~~~~~
-version: '3.1'
+version: '3.6'
 
 services:
 
   kg-db:
     image: ambiverse/kg-db-neo4j
     restart: always
+    deploy:
+      replicas: 1
     environment:
       DUMP_NAME: yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120
       NEO4J_dbms_active__database: yago_aida_en20180120_cs20180120_de20180120_es20180120_ru20180120_zh20180120.db
@@ -77,38 +79,56 @@ services:
       NEO4J_dbms_security_procedures_unrestricted: apoc.*
       NEO4J_AUTH: neo4j/neo4j_pass
     ulimits:
-        nofile:
-            40000:40000     
+      nofile:
+        40000
     volumes:
-      - $HOME/neo4j/data:/data               
+      - type: volume
+        source: dbdata
+        target: /data
+      - type: tmpfs
+        target: /var/tmp/data
+        tmpfs:
+          size: 107374182400
+    healthcheck:
+      test: curl -sS http://127.0.0.1:7474/browser/ || exit 1
+      interval: 1m
+      timeout: 60s
+      retries: 15
+      start_period: 60m
+    networks:
+      kgnet:
+        aliases:
+          - kg-db
 
-  nlu:
+  kg:
     image: ambiverse/ambiverse-kg
     restart: always
+    deploy:
+      replicas: 1 # Increase the number of replicas if you want to scale horizontally
+      resources:
+        limits:
+          #cpus: "1"
+          memory: 16G
+      restart_policy:
+        condition: on-failure
     depends_on:
       - kg-db
     ports:
       - 8080:8080
+    networks:
+      - kgnet
+    healthcheck:
+      test: curl -sS http://127.0.0.1:8080/v2/knowledgegraph/entities/Q567 || exit 1
+      interval: 1m
+      timeout: 60s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  dbdata:
+
+networks:
+  kgnet:
 ~~~~~~~~
 
 Run `docker stack deploy -c service-kg.yml ambiverse-kg` (or `docker-compose -f service-kg.yml up`), wait for it to initialize completely.
-
-## Additional configuration
-Once the neo4j docker container starts, and the database loading finishes (Please inspect the logs with `docker logs -f kg-db-neo4j` to see when the database loading finishes), you need to create two indices and create one procedure.
-There are multiple ways of doing this. The easiest way is to login to the `neo4j` console on `http://YOUR_SERVER:7474` and login with the database credentials (default `neo4j/neo4j_pass`).
-Then run the following commands, one by one:
-~~~~~~~~
-CREATE INDEX ON :WikidataInstance(url);
-~~~~~~~~
-
-~~~~~~~~
-CREATE INDEX ON :Location(location);
-~~~~~~~~
-
-~~~~~~~~
-CALL apoc.periodic.commit("MATCH (l:Location) where not exists(l.location) with l limit 10000 SET l.location =  point({latitude: l.latitude, longitude: l.longitude, crs: 'WGS-84'}) return count(l)", {})
-~~~~~~~~
-
-&nbsp;
-
-Another way is to login to the docker container `docker exec -it kg-db-neo4j /bin/bash` and run a `cypher-shell` and execute the same commands above.
